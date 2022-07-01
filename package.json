@@ -57,12 +57,12 @@
   "types": "./dist/typings.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chmln/flatpickr.git"
+    "url": "git+https://github.com/mgmeyers/flatpickr.git"
   },
   "author": "Gregory <gregory.mkv@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chmln/flatpickr/issues"
+    "url": "https://github.com/mgmeyers/flatpickr/issues"
   },
   "homepage": "https://flatpickr.js.org",
   "keywords": [
