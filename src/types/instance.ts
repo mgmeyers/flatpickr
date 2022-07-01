@@ -131,6 +131,7 @@ export type Instance = Elements &
       options?: { capture?: boolean; once?: boolean; passive?: boolean }
     ) => void;
     _createElement: <E extends HTMLElement>(
+      doc: Document,
       tag: keyof HTMLElementTagNameMap,
       className: string,
       content?: string

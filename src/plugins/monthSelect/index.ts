@@ -49,6 +49,7 @@ function monthSelectPlugin(pluginConfig?: Partial<Config>): Plugin {
       if (!fp.rContainer) return;
 
       self.monthsContainer = fp._createElement<HTMLDivElement>(
+        fp.rContainer.ownerDocument,
         "div",
         "flatpickr-monthSelect-months"
       );
@@ -69,7 +70,7 @@ function monthSelectPlugin(pluginConfig?: Partial<Config>): Plugin {
 
       clearNode(self.monthsContainer);
 
-      const frag = document.createDocumentFragment();
+      const frag = self.monthsContainer.ownerDocument.createDocumentFragment();
 
       for (let i = 0; i < 12; i++) {
         const month = fp.createDay(
@@ -267,7 +268,7 @@ function monthSelectPlugin(pluginConfig?: Partial<Config>): Plugin {
 
       let index = Array.prototype.indexOf.call(
         self.monthsContainer.children,
-        document.activeElement
+        self.monthsContainer.ownerDocument.activeElement
       );
 
       if (index === -1) {
@@ -278,14 +279,21 @@ function monthSelectPlugin(pluginConfig?: Partial<Config>): Plugin {
       }
 
       if (shouldMove) {
-        (self.monthsContainer.children[
-          (12 + index + shifts[e.keyCode]) % 12
-        ] as HTMLElement).focus();
+        (
+          self.monthsContainer.children[
+            (12 + index + shifts[e.keyCode]) % 12
+          ] as HTMLElement
+        ).focus();
       } else if (
         e.keyCode === 13 &&
-        self.monthsContainer.contains(document.activeElement)
+        self.monthsContainer.contains(
+          self.monthsContainer.ownerDocument.activeElement
+        )
       ) {
-        setMonth((document.activeElement as MonthElement).dateObj);
+        setMonth(
+          (self.monthsContainer.ownerDocument.activeElement as MonthElement)
+            .dateObj
+        );
       }
     }
 

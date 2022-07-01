@@ -8,11 +8,12 @@ export function toggleClass(
 }
 
 export function createElement<T extends HTMLElement>(
+  doc: Document,
   tag: keyof HTMLElementTagNameMap,
   className: string,
   content?: string
 ): T {
-  const e = window.document.createElement(tag) as T;
+  const e = doc.createElement(tag) as T;
   className = className || "";
   content = content || "";
 
@@ -39,16 +40,18 @@ export function findParent(
 }
 
 export function createNumberInput(
+  doc: Document,
   inputClassName: string,
   opts?: Record<string, any>
 ) {
-  const wrapper = createElement<HTMLDivElement>("div", "numInputWrapper"),
+  const wrapper = createElement<HTMLDivElement>(doc, "div", "numInputWrapper"),
     numInput = createElement<HTMLInputElement>(
+      doc,
       "input",
       "numInput " + inputClassName
     ),
-    arrowUp = createElement<HTMLSpanElement>("span", "arrowUp"),
-    arrowDown = createElement<HTMLSpanElement>("span", "arrowDown");
+    arrowUp = createElement<HTMLSpanElement>(doc, "span", "arrowUp"),
+    arrowDown = createElement<HTMLSpanElement>(doc, "span", "arrowDown");
 
   if (navigator.userAgent.indexOf("MSIE 9.0") === -1) {
     numInput.type = "number";

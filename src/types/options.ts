@@ -266,6 +266,8 @@ Use it along with "enableTime" to create a time picker. */
 
   /* See https://chmln.github.io/flatpickr/examples/#flatpickr-external-elements */
   wrap: boolean;
+
+  win: Window;
 }
 
 export type Options = Partial<BaseOptions>;
@@ -339,6 +341,7 @@ export interface ParsedOptions {
   time_24hr: boolean;
   weekNumbers: boolean;
   wrap: boolean;
+  win: Window;
 }
 
 export const defaults: ParsedOptions = {
@@ -421,4 +424,5 @@ export const defaults: ParsedOptions = {
   time_24hr: false,
   weekNumbers: false,
   wrap: false,
+  win: window,
 };

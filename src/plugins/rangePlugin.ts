@@ -3,6 +3,7 @@ import { Plugin } from "../types/options";
 export interface Config {
   input?: string | HTMLInputElement;
   position?: "left";
+  win?: Window;
 }
 
 declare global {
@@ -23,7 +24,9 @@ function rangePlugin(config: Config = {}): Plugin {
         secondInput =
           config.input instanceof Element
             ? config.input
-            : (window.document.querySelector(config.input) as HTMLInputElement);
+            : ((config.win || window).document.querySelector(
+                config.input
+              ) as HTMLInputElement);
 
         if (!secondInput) {
           fp.config.errorHandler(new Error("Invalid input element specified"));
@@ -188,10 +191,9 @@ function rangePlugin(config: Config = {}): Plugin {
           _prevDates = [...newDates];
         }
 
-        [
-          fp._input.value = "",
-          secondInput.value = "",
-        ] = fp.selectedDates.map((d) => fp.formatDate(d, dateFormat));
+        [fp._input.value = "", secondInput.value = ""] = fp.selectedDates.map(
+          (d) => fp.formatDate(d, dateFormat)
+        );
       },
     };
 
